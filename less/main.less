@@ -1,0 +1,207 @@
+/* begin main styles */
+html, body, .body-inner{
+  height: 100%;
+}
+.body-inner{
+  max-width: 1920px;
+  font-size: 16px;
+  font-family: @font-brown-reg;
+  line-height: 1.425;
+  //letter-spacing: 0.05em;
+  color: rgba(0, 0, 0, 1);
+  margin-left: auto;
+  margin-right: auto;
+}
+body, p, address, ul, li, div{
+  letter-spacing: 1px;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: inherit;
+    font-family: @font-brown-reg;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+}
+.wrapper-for-sticky-footer-structure{
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -@sticky-structure-height;
+}
+.empty-block-for-sticky-footer{
+  height: @sticky-structure-height;
+}
+.empty-block-for-sticky-footer.pb{
+  padding-bottom: @sticky-block-padding-bottom;
+}
+.clr{
+  clear: both;
+}
+.container{
+  width: 1080px;
+  margin: 0 auto;
+}
+a{
+  text-decoration: none;
+  color: @color-main;
+
+  &:hover{
+    text-decoration: underline;
+    color: @color-main-serv1;
+  }
+  &:focus{
+    text-decoration: underline;
+    color: @color-main-serv1;
+    outline: thin dotted #333333;
+    outline-offset: -2px;
+  }
+}
+
+a.button,
+a.added_to_cart{
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255, 1);
+  background: rgba(0,0,0, 1);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 17px 36px 15px;
+  border: 1px solid rgba(0,0,0, 1);
+
+  &:hover{
+    text-decoration: none;
+  }
+  &:focus{
+    text-decoration: none;
+    outline: none;
+  }
+  &:active{
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255, 1);
+  }
+}
+
+.content-format{
+
+  h2, .h2{
+    font-size: 36px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(0,0,0, 0.95);
+    padding-top: 20px;
+    margin-bottom: 36px;
+  }
+  h3, .h3{
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(0,0,0, 0.95);
+    padding-top: 20px;
+    margin-bottom: 24px;
+  }
+  h4, .h4{
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(0,0,0, 0.95);
+    padding-top: 20px;
+    margin-bottom: 16px;
+  }
+  p{
+    margin-bottom: 16px;
+  }
+  ul{
+    margin-bottom: 16px;
+
+    li{
+      position: relative;
+
+      div.marker{
+        position: absolute;
+        top: 8px;
+        left: 0;
+        width: 5px;
+        height: 2px;
+        background: @color-main;
+        display: inline-block;
+      }
+      div.content{
+        padding-left: 10px;
+      }
+    }
+  }
+  li{
+    margin-bottom: 8px;
+  }
+}
+
+.row{
+  overflow: hidden;
+
+  .col{
+    float: left;
+  }
+}
+
+.mailing-form{
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid @color-main;
+  border-bottom: 1px solid @color-main;
+
+  form{
+    width: 610px;
+    text-align: center;
+    margin: 0 auto;
+    overflow: hidden;
+
+    .sign-up-email{
+      display: inline;
+
+      label{
+        font-size: 14px;
+        font-family: @font-brown-reg-rec;
+        color: @color-main;
+      }
+      input{
+        width: 160px;
+        height: 20px;
+        font-size: 12px;
+        font-family: @font-brown-reg-rec;
+        line-height: 20px;
+        color: #222;
+        background: #f2f2f2;
+        border: none;
+        padding: 0 10px;
+        margin: 0 16px;
+
+        &:active{
+
+        }
+      }
+    }
+    .sign-up-button{
+      display: inline;
+
+      button.btn{
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: @color-main;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.woocommerce-breadcrumb{
+  display: none;
+}
+/* end main styles */

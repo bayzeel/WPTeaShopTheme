@@ -1,0 +1,160 @@
+/* begin header styles*/
+.header{
+  //padding-top: 15px;
+  text-align: center;
+
+  .clr.head-marg{
+    margin-bottom: 20px;
+  }
+
+  a.logo-wrap{
+    width: 280px;
+    height: 130px;
+    margin: 0 auto 40px;
+    overflow: hidden;
+    display: block;
+    &:focus{
+      outline: none;
+    }
+
+    img.logo{
+      width: 340px;
+      height: auto;
+      position: relative;
+      top: -10px;
+      left: -40px;
+    }
+  }
+
+  .menu-wrapper{
+
+    ul.menu{
+      width: 100%;
+      font-size: 14px;
+      font-family: @font-brown-reg;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+
+      a{
+        color: rgba(0, 0, 0, 1);
+
+        &:hover{
+          text-decoration: none;
+          //color: @color-main;
+        }
+        &:active{
+          text-decoration: none;
+          //color: @color-main-serv3;
+        }
+      }
+
+      a.last span.icon-cart{
+        height: 16px;
+        background: url("images/icon-cart.png") left top no-repeat;
+        padding-right: 25px;
+      }
+
+      >li{
+        float: left;
+        border-top: 1px solid rgba(0,0,0, 0);
+        margin-left: 17px;
+        margin-right: 17px;
+        //padding-top: 5px;
+
+        >a{
+          padding: 5px 10px;
+        }
+
+        >a.last .amount,
+        >a.wpmenucart-contents .amount{
+          color: @color-main;
+        }
+      }
+      >li.menu-item-has-children{
+        position: relative;
+        border-left: 1px solid rgba(0,0,0, 0);
+        border-right: 1px solid rgba(0,0,0, 0);
+        margin-top: -5px;
+        margin-left: 17px;
+        margin-right: 17px;
+
+        >a{
+          position: relative;
+          padding: 5px 10px;
+          border-bottom: 1px solid rgba(255,255,255, 1);
+          display: inline-block;
+          z-index: 1000;
+
+          span.line{
+            border-bottom: 1px solid rgba(0,0,0, 1);
+          }
+          span.caret{
+            height: 4px;
+            vertical-align: middle;
+            background: url("images/arrow-dropdown-menu.png") left top no-repeat;
+            margin-left: 4px;
+            margin-top: -3px;
+            padding-left: 8px;
+            display: inline-block;
+          }
+        }
+
+        ul.sub-menu{
+          position: absolute;
+          font-size: 13px;
+          text-align: left;
+          background: rgba(255,255,255, 1);
+          padding: 5px 0 0;
+          border: 1px solid rgba(0,0,0, 0.15);
+          margin-top: -1px;
+          margin-left: -1px;
+          z-index: 999;
+          display: none;
+
+          li{
+            white-space: nowrap;
+          }
+        }
+      }
+      >li.menu-item-has-children:hover{
+        border-left: 1px solid rgba(0,0,0, 0.15);
+        border-right: 1px solid rgba(0,0,0, 0.15);
+        border-top: 1px solid rgba(0,0,0, 0.15);
+
+        >a{
+          border-bottom: 1px solid rgba(255,255,255, 1);
+        }
+
+        ul.sub-menu{
+          display: block;
+          box-shadow: 1px 1px 2px rgba(0,0,0, 0.15);
+
+          li{
+            //margin-bottom: 7px;
+
+            a{
+              padding: 7px 15px;
+              display: block;
+
+              &:hover{
+                color: @color-main;
+              }
+            }
+          }
+        }
+      }
+      ul{
+        overflow: hidden;
+
+        li{
+
+        }
+      }
+    }
+  }
+
+  .total-cart-summ{
+    //display: none;
+  }
+}
+/* end header styles */
