@@ -25,45 +25,51 @@ if ( ! $product->is_purchasable() ) {
 
 	<div class="one-product-page">
 		<div class="container">
+			<h1 itemprop="name" class="product_title entry-title"><?php the_title(); ?></h1>
 			<div class="top-content">
 				<div class="left">
 					<div class="images">
-						<?php
-							if ( has_post_thumbnail() ) {
+						<div class="wrap-main-pic">
+							<?php
+								if ( has_post_thumbnail() ) {
 
-								$image_title 	= esc_attr( get_the_title( get_post_thumbnail_id() ) );
-								$image_caption 	= get_post( get_post_thumbnail_id() )->post_excerpt;
-								$image_link  	= wp_get_attachment_url( get_post_thumbnail_id() );
-								$image       	= get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ), array(
-									'title'	=> $image_title,
-									'alt'	=> $image_title
-								) );
+									$image_title 	= esc_attr( get_the_title( get_post_thumbnail_id() ) );
+									$image_caption 	= get_post( get_post_thumbnail_id() )->post_excerpt;
+									$image_link  	= wp_get_attachment_url( get_post_thumbnail_id() );
+									$image       	= get_the_post_thumbnail( $post->ID, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ), array(
+										'title'	=> $image_title,
+										'alt'	=> $image_title
+									) );
 
-								$attachment_count = count( $product->get_gallery_attachment_ids() );
+									$attachment_count = count( $product->get_gallery_attachment_ids() );
 
-								if ( $attachment_count > 0 ) {
-									$gallery = '[product-gallery]';
+									if ( $attachment_count > 0 ) {
+										$gallery = '[product-gallery]';
+									} else {
+										$gallery = '';
+									}
+
+									echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" itemprop="image" class="woocommerce-main-image zoom" title="%s" data-rel="prettyPhoto' . $gallery . '">%s</a>', $image_link, $image_caption, $image ), $post->ID );
+
 								} else {
-									$gallery = '';
+
+									echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<img src="%s" alt="%s" />', wc_placeholder_img_src(), __( 'Placeholder', 'woocommerce' ) ), $post->ID );
+
 								}
+							?>
+						</div>
 
-								echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" itemprop="image" class="woocommerce-main-image zoom" title="%s" data-rel="prettyPhoto' . $gallery . '">%s</a>', $image_link, $image_caption, $image ), $post->ID );
-
-							} else {
-
-								echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<img src="%s" alt="%s" />', wc_placeholder_img_src(), __( 'Placeholder', 'woocommerce' ) ), $post->ID );
-
-							}
-						?>
-
-						<?php do_action( 'woocommerce_product_thumbnails' ); ?>
+						<div class="wrap-gall">
+							<?php do_action( 'woocommerce_product_thumbnails' ); ?>
+						</div>
 
 					</div>
 				</div><!-- end .top-content .left -->
 				<div class="right">
-					<h1 itemprop="name" class="product_title entry-title"><?php the_title(); ?></h1>
 					<div class="description">
-						<?php the_content(); ?>
+						<div class="content-format">
+							<?php the_content(); ?>
+						</div>
 					</div>
 					<div class="price-and-add-to-cart">
 						<?php
@@ -120,12 +126,14 @@ if ( ! $product->is_purchasable() ) {
 				</div><!-- end .top-content .right -->
 			</div>
 
-			<?php
-				$mykey_values = get_post_custom_values( 'product_details_meta' );
-				foreach ( $mykey_values as $key => $value ) {
-					echo $value;
-				}
-			?>
+			<div class="content-format second-cont-block">
+				<?php
+					$mykey_values = get_post_custom_values( 'product_details_meta' );
+					foreach ( $mykey_values as $key => $value ) {
+						echo $value;
+					}
+				?>
+			</div>
 
 			<div class="related-posts">
 				<?php
@@ -141,8 +149,9 @@ if ( ! $product->is_purchasable() ) {
 					'post_type'            => 'product',
 					'ignore_sticky_posts'  => 1,
 					'no_found_rows'        => 1,
-					'posts_per_page'       => $posts_per_page,
+					'posts_per_page'       => 3,
 					'orderby'              => $orderby,
+					'order'                => 'ASC',
 					'post__in'             => $related,
 					'post__not_in'         => array( $product->id )
 				) );
@@ -171,7 +180,7 @@ if ( ! $product->is_purchasable() ) {
 
 				<?php endif;
 
-				wp_reset_postdata();
+				//wp_reset_postdata();
 				?>
 			</div>
 

@@ -343,5 +343,32 @@ $(document).ready(function(){
     }
     /*end shop page*/
 
+    /*product page*/
+    $(".one-product-page .thumbnails a").hover(
+        function(){
+            var photo_fullsize = $(this).attr("href");
+            $(".woocommerce-main-image img").attr("src", photo_fullsize).css({width: 500, height: 500});
+            $(".wrap-main-pic a.woocommerce-main-image").attr("href", photo_fullsize);
+
+            /*$(".woocommerce-main-image img").elevateZoom({
+                cursor: "pointer",
+                galleryActiveClass: "active",
+                imageCrossfade: true,
+                zoomWindowFadeIn: 500,
+                zoomWindowFadeOut: 500,
+                lensFadeIn: 500,
+                lensFadeOut: 500,
+                zoomWindowWidth: 500,
+                zoomWindowHeight: 500,
+                zoomWindowPosition: 1,
+                zoomWindowOffetx: 80,
+                tint: true,
+                tintColour: '#F90',
+                tintOpacity: 0.5
+            });*/
+        }
+    );
+    /*end product page*/
+
 
 });

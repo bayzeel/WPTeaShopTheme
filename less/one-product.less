@@ -1,3 +1,140 @@
-/* begin 1 index page styles */
+/* begin 3 single product page styles */
+.one-product-page{
 
-/* end 1 index page styles */
+  h1, h2{
+    font-size: 25px;
+    line-height: 44px;
+    text-align: center;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .top-content{
+    margin-top: 55px;
+    overflow: hidden;
+
+    .left{
+      width: 500px;
+      float: left;
+
+      .images{
+
+        .wrap-main-pic{
+
+        }
+        .wrap-gall{
+          width: 500px;
+          height: 160px;
+          margin-top: 3px;
+          overflow: hidden;
+
+          a:nth-child(2){
+            margin-left: 10px;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    .right{
+      width: 500px;
+      float: left;
+      padding-left: 80px;
+
+      .price-and-add-to-cart{
+
+        form{
+
+          .qty-n-price{
+            padding-top: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+
+            .qty{
+              float: left;
+            }
+            .price{
+              float: left;
+              margin-left: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .second-cont-block{
+    margin-top: 95px;
+    margin-bottom: 100px;
+
+    h2, h3{
+      font-size: 21px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .section-one{
+      text-align: center;
+      padding: 0 0 10px;
+      border-top: 1px solid #1266c3;
+      border-bottom: 1px solid #1266c3;
+    }
+  }
+  .related-posts{
+    margin-bottom: 55px;
+
+    a{
+      outline: none;
+      &:focus,
+      &:active{
+        outline: none;
+      }
+    }
+
+    h2{
+      font-size: 21px;
+      margin-bottom: 20px;
+    }
+    ul.products{
+      overflow: hidden;
+
+      li {
+        float: left;
+        width: 320px;
+        text-align: center;
+        display: block;
+        &:nth-child(3n+2) {
+          margin-left: 60px;
+          margin-right: 60px;
+        }
+        >a {
+          color: rgba(0, 0, 0, 0.95);
+          &:hover,
+          &:focus,
+          &:active {
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.95);
+          }
+
+          span.onsale {
+            display: none;
+          }
+          span.price {
+            display: none;
+          }
+
+          img {
+            width: 320px;
+            height: 320px;
+          }
+          h3 {
+            font-size: 17px;
+            text-transform: uppercase;
+          }
+        }
+        a.button.add_to_cart_button {
+          display: none;
+        }
+      }
+    }
+  }
+}
+/* end 3 single product page styles */
