@@ -1,0 +1,134 @@
+/* begin 4 cart styles for desktop */
+.container.cart{
+
+  .woocommerce table.shop_table{
+    border-radius: 0;
+    margin: 0;
+
+    th{
+      font-family: @font-brown-reg;
+      font-weight: normal;
+      color: rgba(0,0,0, 0.5);
+    }
+    td.product-thumbnail{
+
+      a{
+        outline: none;
+      }
+    }
+    td.product-remove{
+
+      a{
+        outline: none;
+
+        &:hover,
+        &:active,
+        &:focus{
+          color: red!important;
+          background: none!important;
+        }
+
+        i{
+          font-size: 20px;
+
+          &:hover,
+          &:active,
+          &:focus{
+            background: none;
+          }
+        }
+      }
+    }
+    td.actions{
+
+      .button{
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(255,255,255, 1);
+        background: rgba(0,0,0, 1);
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 17px 36px 15px;
+        border: 1px solid rgba(0,0,0, 1);
+        border-radius: 0;
+        cursor: pointer;
+
+        &:focus{
+          border: 1px solid rgba(255,255,255, 1);
+        }
+      }
+    }
+  }
+  .cart_totals{
+    text-align: right;
+    margin-top: 35px;
+
+    table{
+      float: right;
+      width: 280px;
+      text-align: right;
+
+      th{
+        float: left;
+      }
+      td{
+        float: right;
+      }
+    }
+    .wc-proceed-to-checkout{
+      margin-top: 25px;
+
+      a{
+        float: right;
+        width: 280px;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(255,255,255, 1);
+        background: rgba(0,0,0, 1);
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 17px 0 15px;
+        border: 1px solid rgba(0,0,0, 1);
+        border-radius: 0;
+        display: block;
+        cursor: pointer;
+
+        &:focus{
+          border: 1px solid rgba(255,255,255, 1);
+        }
+      }
+    }
+  }
+
+  p.return-to-shop{
+
+    a.button.wc-backward{
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255, 1);
+      background: rgba(0,0,0, 1);
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 17px 36px 15px;
+      border: 1px solid rgba(0,0,0, 1);
+      border-radius: 0;
+      cursor: pointer;
+
+      &:focus{
+        border: 1px solid rgba(255,255,255, 1);
+      }
+    }
+  }
+}
+/* end 4 cart styles for desktop */

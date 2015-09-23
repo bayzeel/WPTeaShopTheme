@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-wc_print_notices();
+//wc_print_notices();
 
 do_action( 'woocommerce_before_cart' ); ?>
 
@@ -44,7 +44,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 					<td class="product-remove">
 						<?php
-							echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf( '<a href="%s" class="remove" title="%s">&times;</a>', esc_url( WC()->cart->get_remove_url( $cart_item_key ) ), __( 'Remove this item', 'woocommerce' ) ), $cart_item_key );
+							echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf( '<a href="%s" class="remove" title="%s"><i class="delete-icon fa fa-times fa-2x"></i></a>', esc_url( WC()->cart->get_remove_url( $cart_item_key ) ), __( 'Remove this item', 'woocommerce' ) ), $cart_item_key );
 						?>
 					</td>
 

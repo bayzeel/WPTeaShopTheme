@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<tr class="shipping">
+<!--<tr class="shipping">
 	<th><?php
 		if ( $show_package_details ) {
 			printf( __( 'Shipping #%d', 'woocommerce' ), $index + 1 );
@@ -102,4 +102,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php woocommerce_shipping_calculator(); ?>
 		<?php endif; ?>
 	</td>
-</tr>
+</tr>-->

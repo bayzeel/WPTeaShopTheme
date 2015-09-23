@@ -324,7 +324,7 @@ $(document).ready(function(){
     $("div.extended-description a.add_to_cart_button").on("click", function(){
         setTimeout(function() {
             window.location = "cart/";
-        }, 500);
+        }, 1200);
     });
 
     $(".mailing-form form .sign-up-email input").keyup(function (e) {
@@ -344,13 +344,71 @@ $(document).ready(function(){
     /*end shop page*/
 
     /*product page*/
+    var indexGallImg = 0; // index for start showing img from similar with thumbnail hover position
+    var hrefsGallery = []; // array for all thumbnails hrefs
+    $('.one-product-page .thumbnails a').each(function() {
+        hrefsGallery.push( {
+            src: $(this).attr("href"),
+        });
+    });
+    $(".woocommerce-main-image").attr("data-effect", "mfp-zoom-in"); // for magnific popup amimation
+    $(".one-product-page .thumbnails a").attr("data-effect", "mfp-zoom-in");
+    var photo_fullsize_first_img = $(".one-product-page .thumbnails a").eq(0).attr("href");
+    $(".woocommerce-main-image img").attr("src", photo_fullsize_first_img).css({width: 500, height: 500});
+    $(".wrap-main-pic a.woocommerce-main-image").attr("href", photo_fullsize_first_img); // add href when page load
+    $(".woocommerce-main-image img").hover(function(){
+        $(this).elevateZoom({
+            cursor: "pointer",
+            galleryActiveClass: "active",
+            imageCrossfade: true,
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 500,
+            lensFadeIn: 500,
+            lensFadeOut: 500,
+            zoomWindowWidth: 500,
+            zoomWindowHeight: 500,
+            zoomWindowPosition: 1,
+            zoomWindowOffetx: 80,
+            tint: true,
+            tintColour: '#000',
+            tintOpacity: 0.5
+        });
+        $(this).click(function(){
+            // remove zoom and initialize popup
+            if($(this).hasClass("zoomed")){
+                $(".zoomContainer").remove();
+                $(this).removeClass("zoomed");
+            }
+            $(".zoomContainer").remove();
+            $(this).removeClass("zoomed");
+            $(".woocommerce-main-image").magnificPopup({
+                type: "image",
+                items: hrefsGallery,
+                gallery:{
+                    enabled: true
+                },
+                index: indexGallImg,
+                removalDelay: 150,
+                callbacks: {
+                    beforeOpen: function() {
+                        // just a hack that adds mfp-anim class to markup
+                        this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                        this.st.mainClass = this.st.el.attr('data-effect');
+                    }
+                }
+            });
+        });
+    });
+
     $(".one-product-page .thumbnails a").hover(
         function(){
+            // when we hover on thumbnail, we change main image src and initialize zoom for new picture
+            indexGallImg = $(this).index();
             var photo_fullsize = $(this).attr("href");
             $(".woocommerce-main-image img").attr("src", photo_fullsize).css({width: 500, height: 500});
             $(".wrap-main-pic a.woocommerce-main-image").attr("href", photo_fullsize);
 
-            /*$(".woocommerce-main-image img").elevateZoom({
+            $(".woocommerce-main-image img").elevateZoom({
                 cursor: "pointer",
                 galleryActiveClass: "active",
                 imageCrossfade: true,
@@ -363,11 +421,86 @@ $(document).ready(function(){
                 zoomWindowPosition: 1,
                 zoomWindowOffetx: 80,
                 tint: true,
-                tintColour: '#F90',
+                tintColour: '#000',
                 tintOpacity: 0.5
-            });*/
+            });
         }
     );
+    $(".one-product-page .thumbnails").magnificPopup({
+        delegate: "a",
+        type: "image",
+        gallery: {
+            enabled: true
+        },
+        removalDelay: 150,
+        callbacks: {
+            beforeOpen: function() {
+                // just a hack that adds mfp-anim class to markup
+                this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                this.st.mainClass = this.st.el.attr('data-effect');
+            }
+        }
+    });
+    // knowing product id, prevent page refresh, call popup
+    /*var singleProductId = $(".one-product-page input.show-me-id").val();
+    var singleProductQty = $(".one-product-page input.input-text.qty").val();
+    $(".one-product-page .single_add_to_cart_button").click(function(e){
+        //location.reload();
+        e.preventDefault();
+        addToCart(singleProductId, singleProductQty);
+        //return false;
+        //alert(singleProductQty);
+    });
+    function addToCart(p_id, p_qty){
+        $.get("/?add-to-cart=" + p_id, function(){
+            // call back
+        });
+        $.ajax({
+            type: "POST",
+            url: "/", // ../woocommerce/content-single-product.php
+            data: {quantity: p_qty},
+            cache: false,
+            success: function(){
+                alert(singleProductQty);
+            },
+            error: function(){
+                alert("Bad!");
+            }
+        });
+    }*/
+    $("form.cart").on("change", "input.qty", function() {
+        if (this.value === "0")
+            this.value = "1";
+
+        $(this.form).find("button[data-quantity]").data("quantity", this.value);
+    });
+    $(document.body).on("adding_to_cart", function() {
+        $("a.added_to_cart").remove();
+    });
+    $("form.cart input.input-text.qty.text").val(1);
+    // when product quantity changes, update quantity attribute on add-to-cart button
+    $("form.cart").on("change", "input.qty", function() {
+        $(this.form).find("button[data-quantity]").data("quantity", this.value);
+    });
+    $(".one-product-page .button-wrapper-for-popup").magnificPopup({
+        items: {
+            src: $("<div class=\"after-add-to-cart-popup\"><a href='/shop/' class=\"shopping\">Continue Shopping</a><a href='/cart/' class=\"cart\">View Cart</a></div>"),
+        },
+        type: "inline",
+        //closeOnBgClick: false,
+        enableEscapeKey: false,
+        showCloseBtn: false,
+        removalDelay: 100,
+        callbacks: {
+            beforeOpen: function() {
+                // just a hack that adds mfp-anim class to markup
+                this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                this.st.mainClass = this.st.el.attr('data-effect');
+            }
+        }
+    });
+
+
     /*end product page*/
 
 

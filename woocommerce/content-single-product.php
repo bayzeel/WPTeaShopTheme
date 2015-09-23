@@ -94,7 +94,7 @@ if ( ! $product->is_purchasable() ) {
 												woocommerce_quantity_input( array(
 													'min_value'   => apply_filters( 'woocommerce_quantity_input_min', 1, $product ),
 													'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->backorders_allowed() ? '' : $product->get_stock_quantity(), $product ),
-													'input_value' => ( isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : 1 )
+													'input_value' => ( isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : 1 ) // $_GET were $_POST
 												) );
 											}
 										?>
@@ -112,9 +112,16 @@ if ( ! $product->is_purchasable() ) {
 									</div>
 								</div>
 
-								<input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->id ); ?>" />
+								<input type="hidden" class="show-me-id" name="add-to-cart" value="<?php echo esc_attr( $product->id ); ?>" />
 
-								<button type="submit" class="single_add_to_cart_button button alt"><?php echo $product->single_add_to_cart_text(); ?></button>
+								<!--<button type="submit" class="single_add_to_cart_button button alt"><?php echo $product->single_add_to_cart_text(); ?></button>-->
+								<div class="button-wrapper-for-popup" data-effect="mfp-zoom-in">
+									<button type="submit"
+										data-quantity="1" data-product_id="<?php echo $product->id; ?>"
+										class="button alt single_add_to_cart_button add_to_cart_button product_type_simple">
+										<?php echo $product->single_add_to_cart_text(); ?>
+									</button>
+								</div>
 
 								<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 							</form>

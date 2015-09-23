@@ -99,7 +99,7 @@
                     <?php the_content(); ?>
                 <?php endwhile; ?>
                 <?php else: ?>
-                    <h2>Текст записи</h2>
+                    <h2>Index page content</h2>
                 <?php endif; ?>
             </div><!-- end .content-format -->
         </div><!-- end .container -->

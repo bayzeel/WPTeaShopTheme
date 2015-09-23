@@ -7,13 +7,30 @@ function load_style_script(){
     wp_enqueue_script('cs-jquery', get_template_directory_uri() . '/js/jquery-1.11.1.min.js', array(), null);
     wp_enqueue_script('flexslider-js', get_template_directory_uri() . '/js/jquery.flexslider.js', array(), null);
     wp_enqueue_script('elevatezoom-js', get_template_directory_uri() . '/js/jquery.elevatezoom.js', array(), null);
+    wp_enqueue_script('magnigicpopup-js', get_template_directory_uri() . '/js/jquery.magnific-popup.min.js', array(), null);
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/js/custom.js', array(), null);
 
     wp_enqueue_style('flexslider-style', get_template_directory_uri() . '/css/flexslider.css');
+    wp_enqueue_style('magnigicpopup-style', get_template_directory_uri() . '/css/magnific-popup.css');
     wp_enqueue_style('font-awesome', get_template_directory_uri() . '/css/font-awesome.css');
     wp_enqueue_style('style', get_template_directory_uri() . '/style.css');
 }
 add_action( 'wp_enqueue_scripts', 'load_style_script' );
+
+// Disable woocommerce pretty photo scripts
+add_action( 'wp_print_scripts', 'my_deregister_javascript', 100 );
+
+function my_deregister_javascript() {
+    wp_deregister_script( 'prettyPhoto' );
+    wp_deregister_script( 'prettyPhoto-init' );
+}
+
+// Disable woocommerce pretty photo style
+add_action( 'wp_print_styles', 'my_deregister_styles', 100 );
+
+function my_deregister_styles() {
+    wp_deregister_style( 'woocommerce_prettyPhoto_css' );
+}
 
 // Add menus
 register_nav_menus(array(
@@ -96,4 +113,27 @@ function product_details_save( $post_id ) {
         update_post_meta( $post_id, 'product_details_meta', $_POST['product_details_meta'] );
     }
 }
+/*
+function custom_woo_before_shop_link() {
+    add_filter('woocommerce_loop_add_to_cart_link', 'custom_woo_loop_add_to_cart_link', 10, 2);
+    add_action('woocommerce_after_shop_loop', 'custom_woo_after_shop_loop');
+}
+add_action('woocommerce_before_shop_loop', 'custom_woo_before_shop_link');
 
+function custom_woo_loop_add_to_cart_link($button, $product) {
+    // not for variable, grouped or external products
+    if (!in_array($product->product_type, array('variable', 'grouped', 'external'))) {
+        // only if can be purchased
+        if ($product->is_purchasable()) {
+            // show qty +/- with button
+            ob_start();
+            woocommerce_simple_add_to_cart();
+            $button = ob_get_clean();
+            // modify button so that AJAX add-to-cart script finds it
+            $replacement = sprintf('data-product_id="%d" data-quantity="1" $1 add_to_cart_button product_type_simple ', $product->id);
+            $button = preg_replace('/(class="single_add_to_cart_button)/', $replacement, $button);
+        }
+    }
+    return $button;
+}
+*/
